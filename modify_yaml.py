@@ -37,6 +37,14 @@ def main():
     data['proxy-providers'] = {
         'iplc': new_iplc_provider
     }
+# --- 1. 外部控制与 UI 配置 ---
+    data['external-controller'] = '0.0.0.0:9091'
+    data['external-ui'] = 'ui'
+    data['external-ui-name'] = 'zashboard'
+    data['external-ui-url'] = 'https://ghfast.top/https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip'
+    data['secret'] = '123456'
+
+    
     data['dns'] = {
         'enable': True,
         'listen': '0.0.0.0:7874',
