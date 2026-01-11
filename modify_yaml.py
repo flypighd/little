@@ -56,7 +56,22 @@ def main():
             'tracker.*'  # 脚本会自动处理引号
         ]
     }
-    # --- 2. 修改 proxy-groups (非常重要) ---
+    # --- 2. 插入直连规则到 Rules 部分 ---
+    # 定义你要新增的直连规则
+    new_direct_rules = [
+        'DOMAIN-SUFFIX,yingyi.me,DIRECT',
+        'DOMAIN-SUFFIX,yingyi.men,DIRECT',
+        'DOMAIN-SUFFIX,chdbits.co,DIRECT',
+        'DOMAIN-SUFFIX,chdbits.xyz,DIRECT',
+        'DOMAIN-SUFFIX,ptchdbits.co,DIRECT',
+        'DOMAIN-KEYWORD,tracker,DIRECT'
+    ]
+
+    if 'rules' in data:
+        # 使用列表拼接：新规则在前，旧规则在后
+        # 这样可以确保这些特定域名优先直连
+        data['rules'] = new_direct_rules + list(data['rules'])
+    # --- 3. 修改 proxy-groups (非常重要) ---
     # 原文件里的代理组引用的是旧的 provider 名字，如果不改，代理组会失效
     if 'proxy-groups' in data:
         for group in data['proxy-groups']:
@@ -68,7 +83,7 @@ def main():
             # 如果该组原本手动写了 proxies 列表，建议清空或保留
             # group['proxies'] = ['DIRECT'] # 示例：保留直连节点
 
-    # --- 3. 保存文件 ---
+    # --- 4. 保存文件 ---
     with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
         yaml.dump(data, f)
     print(f"成功生成新配置：{OUTPUT_FILE}")
