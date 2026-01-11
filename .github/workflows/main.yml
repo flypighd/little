@@ -1,0 +1,31 @@
+name: Sync and Modify Clash YAML
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # 每天 UTC 0点执行一次
+  workflow_dispatch:      # 允许手动触发
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          pip install ruamel.yaml requests
+
+      - name: Run modification script
+        run: python modify_yaml.py
+
+      - name: Commit and push changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Auto-update: Sync and modify Clash nodes"
+          file_pattern: 'generated-clash.yaml' # 生成的新文件名
