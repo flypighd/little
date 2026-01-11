@@ -47,50 +47,14 @@ dns:
   fake-ip-range: 198.20.0.1/16
   nameserver:
   - 223.5.5.5
+  - 114.114.114.114
   fake-ip-filter-mode: blacklist
   fake-ip-filter:
   - +.lan
   - +.local
   - geosite:cn
-# 快猫    
-  - +.km688.ink
-# 火烧 
-  - +.onesubv.site
-  - +.oneyyds.online
-  - +.fengyyds.site
-  - +.onemg.top
-# 猫耳 
-  - +.chybinc.com
-# BestVPN 
-  - +.invitevp.com
-  - +.vp2.us
-# 小牛
-  - +.xiaoniuyun.cc
-# 硅谷
-  - +.apple-bing.sbs
-# 无界
-  - +.bncrcloud.com
-# 冰云
-  - +.xby01.xyz
-# 牛逼   
-  - +.idsduf.com
-  - +.66jc.top
-# 极速通        
-  - +.gfw.gg
-# 萌狗       
-  - +.moedog.cloud
-
-# 其他     
-  - +.ynhtbank.com
-  - +.qeayr.cn
-  - +.saojc.xyz
-  - +.sssyun.xyz
-  - +.dler.cloud
-  - +.0tk8a3a1q4t94dler.com
-  - +.aerianas.top
-  - +.gptacg.top
-  - +.wxda.net
-
+  - +.yingyi.me
+  - +.yingyi.men
 ipv6: true
 
 # ========================
