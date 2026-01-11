@@ -304,6 +304,12 @@ proxy-groups:
 # 规则引擎（rules）
 # ========================
 rules:
+- DOMAIN-SUFFIX,yingyi.me,DIRECT
+- DOMAIN-SUFFIX,yingyi.men,DIRECT
+- DOMAIN-SUFFIX,chdbits.co,DIRECT
+- DOMAIN-SUFFIX,chdbits.xyz,DIRECT
+- DOMAIN-SUFFIX,ptchdbits.co,DIRECT
+- DOMAIN-KEYWORD,tracker,DIRECT
 - RULE-SET,TEST / Domain,Test
 - RULE-SET,Block / Domain,Block
 - RULE-SET,ChatGPT / Domain,ChatGPT
@@ -357,10 +363,6 @@ rules:
 - RULE-SET,China / IP,国内,no-resolve
 - RULE-SET,Private / Domain,国内
 - MATCH,其他
-
-# ========================
-# 规则集提供者
-# ========================
 rule-anchor:
   ip: &ip {type: http, interval: 86400, behavior: ipcidr, format: mrs}
   domain: &domain {type: http, interval: 86400, behavior: domain, format: mrs}
