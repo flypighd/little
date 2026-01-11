@@ -37,7 +37,7 @@ def main():
     data['proxy-providers'] = {
         'iplc': new_iplc_provider
     }
-    data['dns'] = {
+  data['dns'] = {
         'enable': True,
         'listen': '0.0.0.0:7874',
         'ipv6': True,
@@ -45,7 +45,16 @@ def main():
         'fake-ip-range': '198.20.0.1/16',
         'nameserver': ['223.5.5.5', '114.114.114.114'],
         'fake-ip-filter-mode': 'blacklist',
-        'fake-ip-filter': ['+.lan', '+.local', 'geosite:cn', '+.yingyi.me', '+.yingyi.men']
+        'fake-ip-filter': [
+            '+.lan', 
+            '+.local', 
+            'geosite:cn',
+            '+.yingyi.me',
+            '+.yingyi.men',
+            '+.chdbits.xyz',
+            '+.ptchdbits.co',
+            'tracker.*'  # 脚本会自动处理引号
+        ]
     }
     # --- 2. 修改 proxy-groups (非常重要) ---
     # 原文件里的代理组引用的是旧的 provider 名字，如果不改，代理组会失效
