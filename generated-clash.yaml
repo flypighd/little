@@ -55,6 +55,9 @@ dns:
   - geosite:cn
   - +.yingyi.me
   - +.yingyi.men
+  - +.chdbits.xyz
+  - +.ptchdbits.co
+  - tracker.*
 ipv6: true
 
 # ========================
