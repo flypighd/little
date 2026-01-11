@@ -37,6 +37,11 @@ def main():
     data['proxy-providers'] = {
         'iplc': new_iplc_provider
     }
+    # --- 强制重写并激活外部控制配置 ---
+    # 先删除可能存在的旧配置（包括注释掉的），确保新配置生效
+    for key in ['external-controller', 'external-ui', 'external-ui-name', 'external-ui-url', 'secret']:
+        if key in data:
+            del data[key]
 # --- 1. 外部控制与 UI 配置 ---
     data['external-controller'] = '0.0.0.0:9091'
     data['external-ui'] = 'ui'
