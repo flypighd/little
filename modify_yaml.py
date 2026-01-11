@@ -3,7 +3,7 @@ import requests
 from ruamel.yaml import YAML
 
 # 配置
-SOURCE_URL = "https://github.com/liandu2024/little/blob/main/yaml/clash-fallback-all.yaml"
+SOURCE_URL = "https://raw.githubusercontent.com/flypighd/little/main/yaml/clash-fallback-all.yaml"
 OUTPUT_FILE = "generated-clash.yaml"
 
 def main():
