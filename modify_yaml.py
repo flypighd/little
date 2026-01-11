@@ -30,7 +30,7 @@ def main():
             'interval': 300
         },
         'proxy': '直连',
-        'path': './providers/iplc.yaml' # 建议加上 path，否则某些 Clash 客户端会报错
+   
     }
 
     # 重置并设置新的 provider
