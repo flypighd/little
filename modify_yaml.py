@@ -37,7 +37,7 @@ def main():
     data['proxy-providers'] = {
         'iplc': new_iplc_provider
     }
-  data['dns'] = {
+    data['dns'] = {
         'enable': True,
         'listen': '0.0.0.0:7874',
         'ipv6': True,
