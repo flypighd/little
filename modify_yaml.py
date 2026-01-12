@@ -21,7 +21,7 @@ def main():
     # --- 1. 修改 proxy-providers ---
     # 定义你想要的配置结构
     new_iplc_provider = {
-        'url': MY_SUBSCRIPTION_URL,
+        'url': "MY_SUBSCRIPTION_URL",
         'type': 'http',
         'interval': 86400,
         'health-check': {
