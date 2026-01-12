@@ -2,7 +2,7 @@ name: Sync and Modify Clash YAML
 
 on:
   schedule:
-    - cron: '0 0 * * *' # 每天 UTC 0点执行一次
+    - cron: '0 0 1 * *' # 每月 UTC 0点执行一次
   workflow_dispatch:      # 允许手动触发
 
 jobs:
