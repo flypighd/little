@@ -6,7 +6,7 @@
 
 proxy-providers:
   iplc:
-    url: 这里填入你的机场订阅链接
+    url: MY_SUBSCRIPTION_URL
     type: http
     interval: 86400
     health-check:
