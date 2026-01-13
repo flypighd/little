@@ -53,11 +53,12 @@ def main():
    #  for key, value in ui_configs.items():
       #   if key in data:
         #     del data[key]  # 删除旧键及其关联的注释
-        data[key] = value  # 写入纯净的新配置
+        # data[key] = value  # 写入纯净的新配置
         # 清除该 key 及其前后的所有注释
         # if hasattr(data, 'ca'):
             # data.ca.items.pop(key, None) 
-       for key, value in ui_configs.items():
+      
+   for key, value in ui_configs.items():
         # 直接覆盖值，不要执行 del data[key]
         # 这样 ruamel.yaml 会保留该 key 在原文件中的位置
         data[key] = value  
