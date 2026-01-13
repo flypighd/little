@@ -21,7 +21,7 @@ def main():
     # --- 1. 修改 proxy-providers ---
     # 定义你想要的配置结构
     new_iplc_provider = {
-        'url': "MY_SUBSCRIPTION_URL",
+        'url': MY_SUBSCRIPTION_URL,
         'type': 'http',
         'interval': 86400,
         'health-check': {
@@ -46,7 +46,7 @@ def main():
         'external-ui-url': 'https://ghfast.top/https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip',
         'secret': '123456'
     }
-
+    data.update(ui_configs)
     
     data['dns'] = {
         'enable': True,
