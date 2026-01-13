@@ -40,13 +40,13 @@ def main():
     }
     # --- 强制重写并激活外部控制配置 ---
     # 先删除可能存在的旧配置（包括注释掉的），确保新配置生效
-    ui_configs = {
+    ui_configs = [
         'external-controller': '0.0.0.0:9091',
         'external-ui': 'ui',
         'external-ui-name': 'zashboard',
         'external-ui-url': 'https://ghfast.top/https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip',
         'secret': '123456'
-    }
+    ]
     # data.update(ui_configs)
     
     # 核心修正：循环删除旧的 key（包括被注释掉的残留），确保重新写入
