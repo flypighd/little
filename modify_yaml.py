@@ -58,13 +58,24 @@ def main():
         # if hasattr(data, 'ca'):
             # data.ca.items.pop(key, None) 
       
-    for key, value in ui_configs.items():
-        data[key] = value  # 直接覆盖，维持原位
-        # 清理该 key 关联的注释（防止出现 # 内容）
+    # 获取 external-controller 原本所在的索引位置
+    try:
+        # 获取原有 key 的索引
+        target_index = list(data.keys()).index('external-controller')
+    except ValueError:
+        # 如果没找到，就设为 0 (最前面)
+        target_index = 0
+
+    # 先彻底删除这些 key（包括可能残留的注释和位置信息）
+    for key, _ in ui_configs:
+        if key in data:
+            del data[key]
         if hasattr(data, 'ca') and key in data.ca.items:
-            # data.ca.items[key] 存储了该 key 的注释信息
-            # 将其设为 None 即可清除注释
             data.ca.items.pop(key, None)
+
+    # 按照刚才记录的索引位置，依次插入新配置
+    for i, (key, value) in enumerate(ui_configs):
+        data.insert(target_index + i, key, value)
     
     data['dns'] = {
         'enable': True,
