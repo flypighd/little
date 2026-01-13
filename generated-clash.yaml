@@ -30,6 +30,8 @@ allow-lan: true
 mode: rule
 log-level: info
 
+external-controller: 0.0.0.0:9091
+secret: "123456"
 dns:
   enable: true
   listen: 0.0.0.0:7874
@@ -408,10 +410,8 @@ rule-providers:
   Google / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/google.mrs"}
   Google / IP: {<<: *ip, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geoip/google.mrs"}
   BiliBili / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/bilibili.mrs"}
-external-controller: 0.0.0.0:9091
 external-ui: ui
 external-ui-name: zashboard
 external-ui-url: https://ghfast.top/https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip
-secret: '123456'
 #  GateFireWall / Domain: {<<: *domain, url: "https://gh-proxy.com/github.com/metacubex/meta-rules-dat/raw/refs/heads/meta/geo/geosite/gfw.mrs"}
 
