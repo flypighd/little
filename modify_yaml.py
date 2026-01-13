@@ -47,16 +47,7 @@ def main():
         ('external-ui-url', 'https://ghfast.top/https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip'),
         ('secret', '123456')
     ]
-    # data.update(ui_configs)
-    
-    # 核心修正：循环删除旧的 key（包括被注释掉的残留），确保重新写入
-   #  for key, value in ui_configs.items():
-      #   if key in data:
-        #     del data[key]  # 删除旧键及其关联的注释
-        # data[key] = value  # 写入纯净的新配置
-        # 清除该 key 及其前后的所有注释
-        # if hasattr(data, 'ca'):
-            # data.ca.items.pop(key, None) 
+   
       
     # 1. 尝试获取 external-controller 原本所在的索引位置
     try:
