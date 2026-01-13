@@ -58,14 +58,13 @@ def main():
         # if hasattr(data, 'ca'):
             # data.ca.items.pop(key, None) 
       
-   for key, value in ui_configs.items():
-        # 直接覆盖值，不要执行 del data[key]
-        # 这样 ruamel.yaml 会保留该 key 在原文件中的位置
-        data[key] = value  
-        
-        # 如果你担心注释干扰，可以只清理注释而不删除 key
+    for key, value in ui_configs.items():
+        data[key] = value  # 直接覆盖，维持原位
+        # 清理该 key 关联的注释（防止出现 # 内容）
         if hasattr(data, 'ca') and key in data.ca.items:
-            data.ca.items.pop(key, None) 
+            # data.ca.items[key] 存储了该 key 的注释信息
+            # 将其设为 None 即可清除注释
+            data.ca.items.pop(key, None)
     
     data['dns'] = {
         'enable': True,
