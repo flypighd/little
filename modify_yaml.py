@@ -16,6 +16,7 @@ def main():
 
     yaml = YAML()
     yaml.preserve_quotes = True # 保留引号格式
+    yaml.width = 4096 # 禁止自动折行，这样 URL 就不会断开了
     data = yaml.load(response.text)
 
     # --- 1. 修改 proxy-providers ---
