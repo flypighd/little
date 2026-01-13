@@ -58,23 +58,27 @@ def main():
         # if hasattr(data, 'ca'):
             # data.ca.items.pop(key, None) 
       
-    # 获取 external-controller 原本所在的索引位置
+    # 1. 尝试获取 external-controller 原本所在的索引位置
     try:
-        # 获取原有 key 的索引
-        target_index = list(data.keys()).index('external-controller')
-    except ValueError:
-        # 如果没找到，就设为 0 (最前面)
+        keys_list = list(data.keys())
+        if 'external-controller' in keys_list:
+            target_index = keys_list.index('external-controller')
+        else:
+            target_index = 0
+    except Exception:
         target_index = 0
 
-    # 先彻底删除这些 key（包括可能残留的注释和位置信息）
-    for key, _ in ui_configs:
+    # 2. 先彻底删除这些 key（包括残留的旧注释），防止重复或位置混乱
+    for item in ui_configs:
+        key = item[0] # 取出 key，例如 'external-ui'
         if key in data:
             del data[key]
         if hasattr(data, 'ca') and key in data.ca.items:
             data.ca.items.pop(key, None)
 
-    # 按照刚才记录的索引位置，依次插入新配置
-    for i, (key, value) in enumerate(ui_configs):
+    # 3. 按照索引位置依次插入新配置，确保它们排在一起且在正确位置
+    for i, item in enumerate(ui_configs):
+        key, value = item[0], item[1]
         data.insert(target_index + i, key, value)
     
     data['dns'] = {
