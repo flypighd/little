@@ -53,6 +53,9 @@ def main():
         if key in data:
             del data[key]  # 删除旧键及其关联的注释
         data[key] = value  # 写入纯净的新配置
+        # 清除该 key 及其前后的所有注释
+        if hasattr(data, 'ca'):
+            data.ca.items.pop(key, None) 
     
     data['dns'] = {
         'enable': True,
