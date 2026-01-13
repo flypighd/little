@@ -50,12 +50,20 @@ def main():
     # data.update(ui_configs)
     
     # 核心修正：循环删除旧的 key（包括被注释掉的残留），确保重新写入
-    for key, value in ui_configs.items():
-        if key in data:
-            del data[key]  # 删除旧键及其关联的注释
+   #  for key, value in ui_configs.items():
+      #   if key in data:
+        #     del data[key]  # 删除旧键及其关联的注释
         data[key] = value  # 写入纯净的新配置
         # 清除该 key 及其前后的所有注释
-        if hasattr(data, 'ca'):
+        # if hasattr(data, 'ca'):
+            # data.ca.items.pop(key, None) 
+       for key, value in ui_configs.items():
+        # 直接覆盖值，不要执行 del data[key]
+        # 这样 ruamel.yaml 会保留该 key 在原文件中的位置
+        data[key] = value  
+        
+        # 如果你担心注释干扰，可以只清理注释而不删除 key
+        if hasattr(data, 'ca') and key in data.ca.items:
             data.ca.items.pop(key, None) 
     
     data['dns'] = {
