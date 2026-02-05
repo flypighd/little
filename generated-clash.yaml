@@ -89,47 +89,45 @@ default: &default
   - 新加坡-故转
   - 韩国-故转
   - 美国-故转
-  - 英国-故转
   - 其他-故转
   - 拒绝
-
 proxy-groups:
   # 业务分流组
-- {name: ChatGPT, <<: *default}
-- {name: Gemini, <<: *default}
-- {name: Copilot, <<: *default}
-- {name: Perplexity, <<: *default}
-- {name: Claude, <<: *default}
-- {name: Meta AI, <<: *default}
-- {name: Grok, <<: *default}
-- {name: Groq, <<: *default}
-- {name: GitHub, <<: *default}
-- {name: Reddit, <<: *default}
-- {name: Telegram, <<: *default}
-- {name: WhatsApp, <<: *default}
-- {name: Facebook, <<: *default}
-- {name: BiliBili, <<: *default}
-- {name: YouTube, <<: *default}
-- {name: TikTok, <<: *default}
-- {name: Netflix, <<: *default}
-- {name: HBO, <<: *default}
-- {name: Disney, <<: *default}
-- {name: Amazon, <<: *default}
-- {name: Crunchyroll, <<: *default}
-- {name: Popcorn, <<: *default}
-- {name: Spotify, <<: *default}
-- {name: Nvidia, <<: *default}
-- {name: Steam, <<: *default}
-- {name: Games, <<: *default}
-- {name: Crypto, <<: *default}
-- {name: Apple, <<: *default}
-- {name: Google, <<: *default}
-- {name: Microsoft, <<: *default}
-- {name: Test, <<: *default}
-- {name: Block, <<: *default}
-- {name: 国外, <<: *default}
-- {name: 国内, <<: *default}
-- {name: 其他, <<: *default}
+- {name: ChatGPT, <<: *default, proxies: [直连, 所有-手动, 所有-自动, 香港-故转, 台湾-故转, 日本-故转, 新加坡-故转, 韩国-故转, 美国-故转, 其他-故转, 拒绝]}
+- {name: Gemini, <<: *default, proxies: [直连, 所有-手动, 所有-自动, 香港-故转, 台湾-故转, 日本-故转, 新加坡-故转, 韩国-故转, 美国-故转, 其他-故转, 拒绝]}
+- {name: Copilot, <<: *default, proxies: [直连, 所有-手动, 所有-自动, 香港-故转, 台湾-故转, 日本-故转, 新加坡-故转, 韩国-故转, 美国-故转, 其他-故转, 拒绝]}
+- {name: Perplexity, <<: *default, proxies: [直连, 所有-手动, 所有-自动, 香港-故转, 台湾-故转, 日本-故转, 新加坡-故转, 韩国-故转, 美国-故转, 其他-故转, 拒绝]}
+- {name: Claude, <<: *default, proxies: [直连, 所有-手动, 所有-自动, 香港-故转, 台湾-故转, 日本-故转, 新加坡-故转, 韩国-故转, 美国-故转, 其他-故转, 拒绝]}
+- {name: Meta AI, <<: *default, proxies: [直连, 所有-手动, 所有-自动, 香港-故转, 台湾-故转, 日本-故转, 新加坡-故转, 韩国-故转, 美国-故转, 其他-故转, 拒绝]}
+- {name: Grok, <<: *default, proxies: [直连, 所有-手动, 所有-自动, 香港-故转, 台湾-故转, 日本-故转, 新加坡-故转, 韩国-故转, 美国-故转, 其他-故转, 拒绝]}
+- {name: Groq, <<: *default, proxies: [直连, 所有-手动, 所有-自动, 香港-故转, 台湾-故转, 日本-故转, 新加坡-故转, 韩国-故转, 美国-故转, 其他-故转, 拒绝]}
+- {name: GitHub, <<: *default, proxies: [直连, 所有-手动, 所有-自动, 香港-故转, 台湾-故转, 日本-故转, 新加坡-故转, 韩国-故转, 美国-故转, 其他-故转, 拒绝]}
+- {name: Reddit, <<: *default, proxies: [直连, 所有-手动, 所有-自动, 香港-故转, 台湾-故转, 日本-故转, 新加坡-故转, 韩国-故转, 美国-故转, 其他-故转, 拒绝]}
+- {name: Telegram, <<: *default, proxies: [直连, 所有-手动, 所有-自动, 香港-故转, 台湾-故转, 日本-故转, 新加坡-故转, 韩国-故转, 美国-故转, 其他-故转, 拒绝]}
+- {name: WhatsApp, <<: *default, proxies: [直连, 所有-手动, 所有-自动, 香港-故转, 台湾-故转, 日本-故转, 新加坡-故转, 韩国-故转, 美国-故转, 其他-故转, 拒绝]}
+- {name: Facebook, <<: *default, proxies: [直连, 所有-手动, 所有-自动, 香港-故转, 台湾-故转, 日本-故转, 新加坡-故转, 韩国-故转, 美国-故转, 其他-故转, 拒绝]}
+- {name: BiliBili, <<: *default, proxies: [直连, 所有-手动, 所有-自动, 香港-故转, 台湾-故转, 日本-故转, 新加坡-故转, 韩国-故转, 美国-故转, 其他-故转, 拒绝]}
+- {name: YouTube, <<: *default, proxies: [直连, 所有-手动, 所有-自动, 香港-故转, 台湾-故转, 日本-故转, 新加坡-故转, 韩国-故转, 美国-故转, 其他-故转, 拒绝]}
+- {name: TikTok, <<: *default, proxies: [直连, 所有-手动, 所有-自动, 香港-故转, 台湾-故转, 日本-故转, 新加坡-故转, 韩国-故转, 美国-故转, 其他-故转, 拒绝]}
+- {name: Netflix, <<: *default, proxies: [直连, 所有-手动, 所有-自动, 香港-故转, 台湾-故转, 日本-故转, 新加坡-故转, 韩国-故转, 美国-故转, 其他-故转, 拒绝]}
+- {name: HBO, <<: *default, proxies: [直连, 所有-手动, 所有-自动, 香港-故转, 台湾-故转, 日本-故转, 新加坡-故转, 韩国-故转, 美国-故转, 其他-故转, 拒绝]}
+- {name: Disney, <<: *default, proxies: [直连, 所有-手动, 所有-自动, 香港-故转, 台湾-故转, 日本-故转, 新加坡-故转, 韩国-故转, 美国-故转, 其他-故转, 拒绝]}
+- {name: Amazon, <<: *default, proxies: [直连, 所有-手动, 所有-自动, 香港-故转, 台湾-故转, 日本-故转, 新加坡-故转, 韩国-故转, 美国-故转, 其他-故转, 拒绝]}
+- {name: Crunchyroll, <<: *default, proxies: [直连, 所有-手动, 所有-自动, 香港-故转, 台湾-故转, 日本-故转, 新加坡-故转, 韩国-故转, 美国-故转, 其他-故转, 拒绝]}
+- {name: Popcorn, <<: *default, proxies: [直连, 所有-手动, 所有-自动, 香港-故转, 台湾-故转, 日本-故转, 新加坡-故转, 韩国-故转, 美国-故转, 其他-故转, 拒绝]}
+- {name: Spotify, <<: *default, proxies: [直连, 所有-手动, 所有-自动, 香港-故转, 台湾-故转, 日本-故转, 新加坡-故转, 韩国-故转, 美国-故转, 其他-故转, 拒绝]}
+- {name: Nvidia, <<: *default, proxies: [直连, 所有-手动, 所有-自动, 香港-故转, 台湾-故转, 日本-故转, 新加坡-故转, 韩国-故转, 美国-故转, 其他-故转, 拒绝]}
+- {name: Steam, <<: *default, proxies: [直连, 所有-手动, 所有-自动, 香港-故转, 台湾-故转, 日本-故转, 新加坡-故转, 韩国-故转, 美国-故转, 其他-故转, 拒绝]}
+- {name: Games, <<: *default, proxies: [直连, 所有-手动, 所有-自动, 香港-故转, 台湾-故转, 日本-故转, 新加坡-故转, 韩国-故转, 美国-故转, 其他-故转, 拒绝]}
+- {name: Crypto, <<: *default, proxies: [直连, 所有-手动, 所有-自动, 香港-故转, 台湾-故转, 日本-故转, 新加坡-故转, 韩国-故转, 美国-故转, 其他-故转, 拒绝]}
+- {name: Apple, <<: *default, proxies: [直连, 所有-手动, 所有-自动, 香港-故转, 台湾-故转, 日本-故转, 新加坡-故转, 韩国-故转, 美国-故转, 其他-故转, 拒绝]}
+- {name: Google, <<: *default, proxies: [直连, 所有-手动, 所有-自动, 香港-故转, 台湾-故转, 日本-故转, 新加坡-故转, 韩国-故转, 美国-故转, 其他-故转, 拒绝]}
+- {name: Microsoft, <<: *default, proxies: [直连, 所有-手动, 所有-自动, 香港-故转, 台湾-故转, 日本-故转, 新加坡-故转, 韩国-故转, 美国-故转, 其他-故转, 拒绝]}
+- {name: Test, <<: *default, proxies: [直连, 所有-手动, 所有-自动, 香港-故转, 台湾-故转, 日本-故转, 新加坡-故转, 韩国-故转, 美国-故转, 其他-故转, 拒绝]}
+- {name: Block, <<: *default, proxies: [直连, 所有-手动, 所有-自动, 香港-故转, 台湾-故转, 日本-故转, 新加坡-故转, 韩国-故转, 美国-故转, 其他-故转, 拒绝]}
+- {name: 国外, <<: *default, proxies: [直连, 所有-手动, 所有-自动, 香港-故转, 台湾-故转, 日本-故转, 新加坡-故转, 韩国-故转, 美国-故转, 其他-故转, 拒绝]}
+- {name: 国内, <<: *default, proxies: [直连, 所有-手动, 所有-自动, 香港-故转, 台湾-故转, 日本-故转, 新加坡-故转, 韩国-故转, 美国-故转, 其他-故转, 拒绝]}
+- {name: 其他, <<: *default, proxies: [直连, 所有-手动, 所有-自动, 香港-故转, 台湾-故转, 日本-故转, 新加坡-故转, 韩国-故转, 美国-故转, 其他-故转, 拒绝]}
 - name: 所有-手动
   type: select
   include-all: true
@@ -149,7 +147,6 @@ proxy-groups:
   proxies:
   - 香港-手动
   - 香港-自动
-
 - name: 香港-手动
   type: select
   include-all: true
@@ -257,25 +254,6 @@ proxy-groups:
   filter: "(?=.*(广美|US|美国|纽约|波特兰|达拉斯|俄勒|凤凰城|费利蒙|洛杉|圣何塞|圣克拉|西雅|芝加|🇺🇸|United States)).*$"
 
   # 英国组
-- name: 英国-故转
-  type: fallback
-  interval: 300
-  lazy: false
-  proxies:
-  - 英国-手动
-  - 英国-自动
-- name: 英国-手动
-  type: select
-  include-all: true
-  filter: "(?=.*(英国|英|伦敦|UK|United Kingdom|🇬🇧|London)).*$"
-- name: 英国-自动
-  type: url-test
-  include-all: true
-  tolerance: 50
-  interval: 300
-  filter: "(?=.*(英国|英|伦敦|UK|United Kingdom|🇬🇧|London)).*$"
-
-  # 其他组
 - name: 其他-故转
   type: fallback
   interval: 300
