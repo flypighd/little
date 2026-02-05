@@ -108,37 +108,51 @@ def main():
         data['rules'] = new_direct_rules + list(data['rules'])
 
 
-    # --- 3. 修改 proxy-groups (深度清理英国痕迹) ---
+    # --- 3. 修改 proxy-groups (批量清理英、韩痕迹) ---
+    # 定义需要删除的国家关键字（用于匹配组名）和正则关键字
+    TARGET_COUNTRIES = ["英国", "韩国"]
+    # 这里的正则关键字要对应“其他”组 filter 里的写法
+    RE_KEYWORDS_TO_REMOVE = [
+        r"英国|UK|United Kingdom|伦敦|英|London|🇬🇧",
+        r"广韩|韩国|韓國|KR|首尔|春川|🇰🇷|Korea"
+    ]
+
     if 'proxy-groups' in data:
         # 1. 清理 default 锚点引用
         if 'default' in data:
             d_proxies = data['default'].get('proxies', [])
-            data['default']['proxies'] = [p for p in d_proxies if p != '英国-故转']
+            data['default']['proxies'] = [
+                p for p in d_proxies 
+                if not any(country in p for country in TARGET_COUNTRIES)
+            ]
 
-        # 2. 移除独立的英国相关代理组
+        # 2. 移除独立的代理组（名字里含“英国”或“韩国”的都删掉）
         data['proxy-groups'] = [
             group for group in data['proxy-groups'] 
-            if "英国" not in group.get('name', '')
+            if not any(country in group.get('name', '') for country in TARGET_COUNTRIES)
         ]
         
-        # 3. 遍历剩余组：清理引用 & 修正正则
-        uk_keywords = r"英国|UK|United Kingdom|伦敦|英|London|🇬🇧"
-        
+        # 3. 遍历剩余组：清理引用关系 & 修正“其他”组的正则
         for group in data['proxy-groups']:
-            # 处理资源引用
             if 'use' in group:
                 group['use'] = ['iplc']
             
-            # 处理组间引用：删除列表中的“英国-故转”
+            # 清理组间嵌套引用
             if 'proxies' in group:
-                group['proxies'] = [p for p in group['proxies'] if p != '英国-故转']
+                group['proxies'] = [
+                    p for p in group['proxies'] 
+                    if not any(country in p for country in TARGET_COUNTRIES)
+                ]
 
-            # 核心：修正“其他”组的 filter 正则表达式
+            # 修正“其他”组的 filter 正则
             if 'filter' in group and isinstance(group['filter'], str):
-                # 将正则中的英国关键词及其前后的竖线 | 删掉，并处理可能出现的重复竖线 ||
-                new_filter = group['filter'].replace(uk_keywords, "").replace("||", "|").replace("|))", "))")
-                group['filter'] = new_filter
-
+                f_str = group['filter']
+                for kw in RE_KEYWORDS_TO_REMOVE:
+                    # 替换掉关键词及其紧跟的竖线
+                    f_str = f_str.replace(kw, "").replace("||", "|")
+                # 修正首尾可能多出的竖线
+                f_str = f_str.replace("|))", "))").replace("(|", "(")
+                group['filter'] = f_str
 
 
     # --- 4. 保存文件 ---
