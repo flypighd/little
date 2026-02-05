@@ -108,10 +108,8 @@ def main():
         data['rules'] = new_direct_rules + list(data['rules'])
 
 
-    # --- 3. 修改 proxy-groups (批量清理英、韩痕迹) ---
-    # 定义需要删除的国家关键字（用于匹配组名）和正则关键字
+    # --- 3. 修改 proxy-groups (清理英韩 & 强制排除“仅海外”) ---
     TARGET_COUNTRIES = ["英国", "韩国"]
-    # 这里的正则关键字要对应“其他”组 filter 里的写法
     RE_KEYWORDS_TO_REMOVE = [
         r"英国|UK|United Kingdom|伦敦|英|London|🇬🇧",
         r"广韩|韩国|韓國|KR|首尔|春川|🇰🇷|Korea"
@@ -126,33 +124,44 @@ def main():
                 if not any(country in p for country in TARGET_COUNTRIES)
             ]
 
-        # 2. 移除独立的代理组（名字里含“英国”或“韩国”的都删掉）
+        # 2. 移除独立的英韩代理组
         data['proxy-groups'] = [
             group for group in data['proxy-groups'] 
             if not any(country in group.get('name', '') for country in TARGET_COUNTRIES)
         ]
         
-        # 3. 遍历剩余组：清理引用关系 & 修正“其他”组的正则
+        # 3. 遍历并修正所有组的 filter
         for group in data['proxy-groups']:
             if 'use' in group:
                 group['use'] = ['iplc']
             
-            # 清理组间嵌套引用
+            # 清理嵌套引用
             if 'proxies' in group:
                 group['proxies'] = [
                     p for p in group['proxies'] 
                     if not any(country in p for country in TARGET_COUNTRIES)
                 ]
 
-            # 修正“其他”组的 filter 正则
+            # 核心：修改 filter 逻辑
             if 'filter' in group and isinstance(group['filter'], str):
                 f_str = group['filter']
+                
+                # A. 先清理掉英韩正则关键词
                 for kw in RE_KEYWORDS_TO_REMOVE:
-                    # 替换掉关键词及其紧跟的竖线
                     f_str = f_str.replace(kw, "").replace("||", "|")
-                # 修正首尾可能多出的竖线
-                f_str = f_str.replace("|))", "))").replace("(|", "(")
+                
+                # B. 注入“排除仅海外”的断言 (?!.*仅海外)
+                # 如果原有正则以 (?=.* 开始，我们在其后插入否定断言
+                if f_str.startswith("(?=.*"):
+                    f_str = f_str.replace("(?=.*", "(?!(.*仅海外))(?=.*", 1)
+                # 如果是“其他”组那种排除式正则 ^((?!(...)).)*$
+                elif f_str.startswith("^((?!( "):
+                    f_str = f_str.replace("(?!(", "(?!(仅海外|", 1)
+                
+                # C. 修正语法痕迹
+                f_str = f_str.replace("|))", "))").replace("(|", "(").replace("||", "|")
                 group['filter'] = f_str
+
 
 
     # --- 4. 保存文件 ---
