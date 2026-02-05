@@ -107,16 +107,30 @@ def main():
         # 这样可以确保这些特定域名优先直连
         data['rules'] = new_direct_rules + list(data['rules'])
     # --- 3. 修改 proxy-groups (非常重要) ---
-    # 原文件里的代理组引用的是旧的 provider 名字，如果不改，代理组会失效
+
+    # --- 3. 修改 proxy-groups (包含锚点清理) ---
     if 'proxy-groups' in data:
+        # 1. 清理 default 锚点中的“英国-故转”
+        if 'default' in data:
+            d_proxies = data['default'].get('proxies', [])
+            data['default']['proxies'] = [p for p in d_proxies if p != '英国-故转']
+
+        # 2. 过滤掉所有包含“英国”字样的代理组定义
+        data['proxy-groups'] = [
+            group for group in data['proxy-groups'] 
+            if "英国" not in group.get('name', '')
+        ]
+        
+        # 3. 处理剩余组的引用关系
         for group in data['proxy-groups']:
-            # 如果该组使用了 'use' 关键字（引用 provider）
+            # 替换资源引用
             if 'use' in group:
-                # 将该组引用的 provider 全部替换为你的 'iplc'
                 group['use'] = ['iplc']
             
-            # 如果该组原本手动写了 proxies 列表，建议清空或保留
-            # group['proxies'] = ['DIRECT'] # 示例：保留直连节点
+            # 清理剩余组中可能存在的“英国-故转”列表项
+            if 'proxies' in group:
+                group['proxies'] = [p for p in group['proxies'] if p != '英国-故转']
+
 
     # --- 4. 保存文件 ---
     with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
