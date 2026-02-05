@@ -106,30 +106,39 @@ def main():
         # 使用列表拼接：新规则在前，旧规则在后
         # 这样可以确保这些特定域名优先直连
         data['rules'] = new_direct_rules + list(data['rules'])
-    # --- 3. 修改 proxy-groups (非常重要) ---
 
-    # --- 3. 修改 proxy-groups (包含锚点清理) ---
+
+    # --- 3. 修改 proxy-groups (深度清理英国痕迹) ---
     if 'proxy-groups' in data:
-        # 1. 清理 default 锚点中的“英国-故转”
+        # 1. 清理 default 锚点引用
         if 'default' in data:
             d_proxies = data['default'].get('proxies', [])
             data['default']['proxies'] = [p for p in d_proxies if p != '英国-故转']
 
-        # 2. 过滤掉所有包含“英国”字样的代理组定义
+        # 2. 移除独立的英国相关代理组
         data['proxy-groups'] = [
             group for group in data['proxy-groups'] 
             if "英国" not in group.get('name', '')
         ]
         
-        # 3. 处理剩余组的引用关系
+        # 3. 遍历剩余组：清理引用 & 修正正则
+        uk_keywords = r"英国|UK|United Kingdom|伦敦|英|London|🇬🇧"
+        
         for group in data['proxy-groups']:
-            # 替换资源引用
+            # 处理资源引用
             if 'use' in group:
                 group['use'] = ['iplc']
             
-            # 清理剩余组中可能存在的“英国-故转”列表项
+            # 处理组间引用：删除列表中的“英国-故转”
             if 'proxies' in group:
                 group['proxies'] = [p for p in group['proxies'] if p != '英国-故转']
+
+            # 核心：修正“其他”组的 filter 正则表达式
+            if 'filter' in group and isinstance(group['filter'], str):
+                # 将正则中的英国关键词及其前后的竖线 | 删掉，并处理可能出现的重复竖线 ||
+                new_filter = group['filter'].replace(uk_keywords, "").replace("||", "|").replace("|))", "))")
+                group['filter'] = new_filter
+
 
 
     # --- 4. 保存文件 ---
